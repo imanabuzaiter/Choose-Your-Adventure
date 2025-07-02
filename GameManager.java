@@ -1,28 +1,21 @@
 public class GameManager {
-    private GameScene[] scenes;          // كل مشاهد اللعبة
-    private int currentSceneIndex;       // المشهد الحالي
-    private String playerName;           // اسم اللاعب
+    private GameScene[] scenes;
+    private int currentSceneIndex;
+    private String playerName;
 
     public GameManager(String playerName) {
         this.playerName = playerName;
-        setupScenes();                   // بناء المشاهد
-        currentSceneIndex = 0;           // نبدأ من أول مشهد
+        setupScenes();
+        currentSceneIndex = 0; // the first scene
     }
 
-    // ترجع المشهد الحالي
     public GameScene getCurrentScene() {
         return scenes[currentSceneIndex];
     }
 
-    // تتأكد إذا خلصت اللعبة (ما فيه خيارات)
-    public boolean isGameOver() {
-        return getCurrentScene().getOptions().length == 0;
-    }
-
-    // للمشهد تنقل التالي حسب اختيار اللاعب
-    public void goToNextScene(int choiceIndex) {
+    public void goToNextScene(int choiceIndex) { // (goToNextScene) move to the next scene , choiceIndex = 0 or 1
         int[] next = getCurrentScene().getNextSceneIndexes();
-        if (choiceIndex >= 0 && choiceIndex < next.length) {
+        if (choiceIndex >= 0 && choiceIndex < next.length) { // to make sure the number that the player put is between 0 and 1
             currentSceneIndex = next[choiceIndex];
         }
     }
@@ -31,9 +24,6 @@ public class GameManager {
         currentSceneIndex = 0;
     }
 
-
-
-    // إعداد كل مشاهد اللعبة
     private void setupScenes() {
         scenes = new GameScene[12];
 
@@ -41,7 +31,7 @@ public class GameManager {
                 "Forest Entrance",
                 playerName + ", you are standing at the edge of a mysterious forest.",
                 new String[]{"Enter the forest", "Go back to the village"},
-                new int[]{1, 2} ,
+                new int[]{1, 2},
                 "images/1.jpg"
         );
 
@@ -49,7 +39,7 @@ public class GameManager {
                 "Inside the Forest",
                 "The trees whisper your name... \"" + playerName + "\"...",
                 new String[]{"Follow the voice", "Climb a tree"},
-                new int[]{3, 4} ,
+                new int[]{3, 4},
                 "images/2.jpg"
         );
 
@@ -57,7 +47,7 @@ public class GameManager {
                 "Back to the Village",
                 playerName + ", you return to the village, wondering what could have been.",
                 new String[]{},
-                new int[]{} ,
+                new int[]{},
                 "images/3.jpg"
         );
 
@@ -65,7 +55,7 @@ public class GameManager {
                 "Mysterious Voice",
                 playerName + ", a lost child appears and asks for your help.",
                 new String[]{"Help the child", "Ignore him"},
-                new int[]{5, 6} ,
+                new int[]{5, 6},
                 "images/4.jpg"
         );
 
@@ -73,7 +63,7 @@ public class GameManager {
                 "The Hidden Camp",
                 "You, " + playerName + ", find an abandoned camp with old maps and tools.",
                 new String[]{"Search the camp", "Leave immediately"},
-                new int[]{5, 2}, // بدل 5 و 1 → خليه يروح للنهاية المنطقية
+                new int[]{5, 2},
                 "images/5.jpg"
         );
 
@@ -81,7 +71,7 @@ public class GameManager {
                 "Talking Tree",
                 "A magical tree speaks to you, " + playerName + ", offering you guidance.",
                 new String[]{"Listen to the tree", "Cut a branch"},
-                new int[]{6, 7} ,
+                new int[]{6, 7},
                 "images/6.jpg"
         );
 
@@ -89,7 +79,7 @@ public class GameManager {
                 "Underground Tunnel",
                 playerName + ", you discover a hidden tunnel beneath the forest floor.",
                 new String[]{"Enter the tunnel", "Stay above ground"},
-                new int[]{7, 8} ,
+                new int[]{7, 8},
                 "images/7.jpg"
         );
 
@@ -97,7 +87,7 @@ public class GameManager {
                 "The Guardian Beast",
                 "A giant beast blocks your way. It looks directly at you, " + playerName + ".",
                 new String[]{"Talk to the beast", "Try to sneak past"},
-                new int[]{8, 9}, // بدل ما يرجعك لمشهد 1، يوديك للنهاية
+                new int[]{8, 9},
                 "images/8.jpg"
         );
 
@@ -105,7 +95,7 @@ public class GameManager {
                 "The Ancient Shrine",
                 playerName + ", you arrive at a glowing ancient shrine filled with mysterious energy.",
                 new String[]{"Touch the shrine", "Walk away"},
-                new int[]{9, 2} ,
+                new int[]{9, 2},
                 "images/9.jpg"
         );
 
@@ -113,7 +103,7 @@ public class GameManager {
                 "The Final Choice",
                 "You reach a treasure chest. What will you do, " + playerName + "?",
                 new String[]{"Open it", "Destroy it"},
-                new int[]{10, 11}, // ممكن تعملي هنا نهايتين منفصلتين بدل نفس المشهد
+                new int[]{10, 11},
                 "images/10.jpg"
         );
 
@@ -133,6 +123,4 @@ public class GameManager {
                 "images/12.jpg"
         );
     }
-
 }
-
